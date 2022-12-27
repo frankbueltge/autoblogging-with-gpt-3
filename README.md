@@ -10,4 +10,4 @@ The code:
 You can use the data from the XML file which includes the response from openai to create a new Wordpress post automatically 
 with several tools or plugins available for Wordpress to create posts from XML files or RSS feeds.
 
-Basically, it' the ultimate autoblogging tool not only for WordPress. It automates everything!
+Basically, it's the ultimate autoblogging tool not only for WordPress. It automates everything!
