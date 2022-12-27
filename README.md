@@ -1,5 +1,7 @@
 # autoblogging-with-gpt-3
 
+Autoblogging with gpt-3 made easy
+
 The code:
 
 1. Fetches a RSS feed and parses the XML
