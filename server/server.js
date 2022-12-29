@@ -6,17 +6,17 @@ import xml2js from 'xml2js';
 import fs from 'fs';
 import { Configuration, OpenAIApi } from 'openai';
 
+// Load environment variables from .env file
 dotenv.config();
-
+// Create a new OpenAI API client
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,  // Replace with your OpenAI API key
 });
-
 const openai = new OpenAIApi(configuration);
-
+// Create a new Express app
 const app = express();
 app.use(cors());
-
+// Create a new route
 app.get('/', async (req, res) => {
   try {
     // Fetch the RSS feed and parse the XML
@@ -24,10 +24,8 @@ app.get('/', async (req, res) => {
     const rssData = await fetch(rssUrl)
       .then(response => response.text())
       .then(str => xml2js.parseStringPromise(str));  // Use parseStringPromise to parse the XML
-
     // Extract the title of the first item in the RSS feed
     const title = rssData.rss.channel[0].item[0].title[0];
-
     // Use the title as an input for the OpenAI API request
     const response = await openai.createCompletion({
       model: "text-davinci-003",
@@ -38,21 +36,18 @@ app.get('/', async (req, res) => {
       frequency_penalty: 0.5,
       presence_penalty: 0,
     });
-
     // Write the response from the OpenAI API to an XML file
     fs.writeFileSync('output.xml', response.data.choices[0].text, 'utf8');
-
     // Send a success message to the client
     res.status(200).send({
       message: `${title}`,
       output: `${response.data.choices[0].text}`
-      
     });
   } catch (error) {
     console.error(error);
     res.status(500).send({ error });
   }
 });
-
+// Start the server
 app.listen(5000, () => console.log('Server is running on port http://localhost:5000'));
 
