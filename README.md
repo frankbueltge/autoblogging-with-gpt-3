@@ -2,6 +2,8 @@
 
 Autoblogging with gpt-3 made easy
 
+Find detailed instructions here <a href="https://frankbueltge.de/autoblogging-with-gpt-3/">https://frankbueltge.de/autoblogging-with-gpt-3/</a>
+
 The code:
 
 1. Fetches a RSS feed and parses the XML
